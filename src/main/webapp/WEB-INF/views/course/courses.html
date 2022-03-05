@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Company</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <table class="table table-dark table-striped">
+        <thead >
+        <tr>
+            <th scope="col" style="color: gold" >#</th>
+            <th scope="col" style="color: gold" ><bold>CoursName</bold></th>
+            <th scope="col" style="color: gold"><bold>Director</bold></th>
+            <th scope="col" style="color: gold"><bold>Company id</bold></th>
+            <th scope="col" style="color: gold"><bold>Group id</bold></th>
+            <th><a href="/cor/adddCourse"><button type="button" class="btn btn-dark" style="color: red">+add Course</button>
+            </a></th>
+        </tr>
+        <tr>
+        </thead>
+        <tbody>
+        <div th:each="course:${courses}">
+          </tr>
+                <th scope="row" th:text = "${course.getId()}"></th>
+                <th scope="row" th:text = "${course.getCourseName()}"></th>
+                <th scope="row" th:text = "${course.getDirection()}"></th>
+                <th scope="row" th:text = "${course.getCompany().getId()}"></th>
+
+                <td>
+                    <a  href="#" th:href="@{/cor/updateCourse/{id}(id=${course.getId()})}">
+                        <button type="button" class="btn btn-primary">update</button>
+                    </a>
+                </td>
+                <td>
+                    <form th:action="@{/cor/deleteCourse/{id}(id=${course.id})}" th:method="delete" >
+                        <input type="hidden" value="delete"/>
+                        <button type="submit" class="btn btn-primary">delete</button>
+                    </form>
+                </td>
+            <td>
+                <a th:href="@{/tea/{id}(id=${course.getId()})}"> <button style="background-color: black;color: white">INFO COURSE</button></a>
+            </td>
+        </div>
+        </tbody>
+    </table>
+
+<!--update1/{id}-->
+
+</head>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>

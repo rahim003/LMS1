@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{saveStudent}" th:object="${student1}">
+    <label for="firstName">Enter  Student name</label>
+    <input type="text" th:field="*{firstName}" id="firstName">
+    <label for="email">Enter email</label>
+    <input type="text" th:field="*{email}" id="email">
+    <label for="LastName">Enter lastName</label>
+    <input type="text" th:field="*{lastName}" id="LastName">
+    <br/>
+    <label for="studyFormat">Enter studyFormat</label>
+    <input type="text" th:field="*{studyFormat}" id="studyFormat">
+    <br/>
+    <label for="groupID">Enter groupId</label>
+    <input type="text" th:field="*{groupID}" id="groupID">
+    <input type="submit" value="Create"/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>.form{
+    align-content: center;
+    size: 100px;
+    border-bottom-left-radius: 100px;
+    margin-right: 100px;
+    color: red;
+    text-align: center;
+    background: black;
+}
+
+</style>
+<body>
+<table style="background: red">
+<form  class="form" th:method="POST" th:action="@{save}" th:object="${company1}">
+    <label for="companyName" style="border-bottom: red" th:align="center">Enter company  name</label>
+    <input type="text" th:field="*{companyName}" id="companyName"/>
+
+    <label for="locatedCountry" style="border-bottom: red" th:align="center">Enter locatedCountry</label>
+    <input style="size: 100px" type="text" th:field="*{locatedCountry}" id="locatedCountry"/>
+    <br/>
+    <input type="submit" value="Create"/>
+    <br/>
+<!--    <div style="color: red" th:if="${#fields.hasErrors('companyName') }" th:errors="*{companyName}">Company name  error</div>-->
+<!--    <div style="color:red" th:if="${#fields.hasErrors('locatedCountry')}" th:errors="*{locatedCountry}">Located company error</div>-->
+
+</form>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

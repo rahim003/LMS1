@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:type="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+</head>
+<body>
+<style>
+
+</style>
+<div>
+    <form class="group" th:method="PATCH" th:action="@{/gro/{id}(id=${updateGro.getId()})}" th:object="${updateGro}">
+        <label for="groupName">Enter name: </label>
+        <input type="text" th:field="*{groupName}" id="groupName"/>
+        <br/>
+        <label for="dateOfStart">Enter dateOfStart: </label>
+        <input type="text" th:field="*{dateOfStart}" id="dateOfStart"/>
+        <br/>
+        <label for="dateOfFinish">Enter dateOffinish: </label>
+        <input type="text" th:field="*{dateOfFinish}" id="dateOfFinish"/>
+        <br/>
+        <label for="course Id">Enter dateOffinish: </label>
+        <input type="text" th:field="*{courseId}" id="course Id"/>
+
+        <input type="submit" value="Update!"/>
+    </form>
+</div>
+</body>
+</html>

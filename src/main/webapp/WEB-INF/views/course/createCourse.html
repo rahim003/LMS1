@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{saveCourse}" th:object="${course1}">
+    <label for="courseName">Enter courSname</label>
+    <input type="text" th:field="*{courseName}" id="courseName">
+    <label for="direction">Enter director</label>
+    <input type="text" th:field="*{direction}" id="direction">
+    <br/>
+    <label for="company Id">Enter company Id</label>
+    <input type="text" th:field="*{companyId}" id="company Id">
+    <br/>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+
+</body>
+</html>
