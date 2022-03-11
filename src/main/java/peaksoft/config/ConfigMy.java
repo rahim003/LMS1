@@ -23,7 +23,7 @@ public class ConfigMy {
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/exam");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/shops");
         dataSource.setUsername("postgres");
         dataSource.setPassword("123123");
         return dataSource;
@@ -51,7 +51,6 @@ public class ConfigMy {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        properties.put("hibernate.show_sql", "true");
         return properties;
     }
 }

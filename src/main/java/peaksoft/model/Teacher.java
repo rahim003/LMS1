@@ -19,17 +19,18 @@ public class Teacher {
     @Column(name = "first_name")
     private String firstName;
     private String email;
-     @Column(name = "last_name")
+    @Column(name = "last_name")
     private String lastName;
-     @Transient
-     private long courseId;
+    @Transient
+    private long courseId;
 
     public Teacher(String firstName, String email, String lastName) {
         this.firstName = firstName;
         this.email = email;
         this.lastName = lastName;
     }
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.DETACH,CascadeType.MERGE})
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     private Course course;
 }

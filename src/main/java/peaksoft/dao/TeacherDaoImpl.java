@@ -14,13 +14,13 @@ public class TeacherDaoImpl implements TeacherDao {
 
     @Override
     public Teacher save(Teacher teacher) {
-        manager.persist(teacher);
+        manager.merge(teacher);
         return teacher;
     }
 
     @Override
     public void updateTeacher(long id, Teacher teacher) {
-        Teacher teacher1=getById(id);
+        Teacher teacher1 = getById(id);
         teacher1.setFirstName(teacher.getFirstName());
         teacher1.setLastName(teacher.getLastName());
         teacher1.setEmail(teacher.getEmail());
@@ -29,17 +29,17 @@ public class TeacherDaoImpl implements TeacherDao {
 
     @Override
     public Teacher getById(long id) {
-        return manager.find(Teacher.class,id);
+        return manager.find(Teacher.class, id);
     }
 
     @Override
     public void deleteById(long id) {
-manager.remove(getById(id));
+        manager.remove(getById(id));
     }
 
     @Override
-    public List<Teacher> teachers(long id) {
-        return manager.createQuery("select teachers from Teacher teachers where teachers.course.id=:id",Teacher.class).setParameter("id", id).getResultList();
+    public List<Teacher> getAllTeacher(long id) {
+        return manager.createQuery("select teachers from Teacher teachers where teachers.course.id=:id", Teacher.class).setParameter("id", id).getResultList();
 
     }
 }

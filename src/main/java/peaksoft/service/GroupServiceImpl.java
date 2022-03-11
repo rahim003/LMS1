@@ -6,13 +6,13 @@ import org.springframework.transaction.annotation.Transactional;
 import peaksoft.dao.GroupDaoImpl;
 import peaksoft.model.Group;
 
-import javax.persistence.Table;
 import java.util.List;
 
 @Service
-public class GroupServiceImpl implements GroupService{
+public class GroupServiceImpl implements GroupService {
     private final GroupDaoImpl groupDao;
-@Autowired
+
+    @Autowired
     public GroupServiceImpl(GroupDaoImpl groupDao) {
         this.groupDao = groupDao;
     }
@@ -21,25 +21,29 @@ public class GroupServiceImpl implements GroupService{
     public Group saveGroup(Group group) {
         return groupDao.saveGroup(group);
     }
-  @Transactional
+
+    @Transactional
     @Override
-    public void updateGroup(long id,Group group) {
-    groupDao.updateGroup(id,group);
+    public void updateGroup(long id, Group group) {
+        groupDao.updateGroup(id, group);
     }
-@Transactional
+
+    @Transactional
     @Override
     public Group getById(long id) {
         return groupDao.getById(id);
     }
-@Transactional
+
+    @Transactional
     @Override
     public void deleteById(long id) {
-    groupDao.deleteById(id);
+        groupDao.deleteById(id);
 
     }
-@Transactional
+
+    @Transactional
     @Override
-    public List<Group> groups() {
-        return groupDao.groups();
+    public List<Group> getAllGroup(long id) {
+        return groupDao.getAllGroup(id);
     }
 }

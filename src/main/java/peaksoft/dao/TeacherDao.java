@@ -13,5 +13,5 @@ public interface TeacherDao {
 
     void deleteById(long id);
 
-    List<Teacher> teachers(long id);
+    List<Teacher>getAllTeacher(long id);
 }

@@ -25,7 +25,8 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
-    @GetMapping()
+
+    @GetMapping("")
     public String getAllCompany(Model model) {
         model.addAttribute("getAllCompany", companyService.getAllCompany());
         return "company/companies";
@@ -37,16 +38,13 @@ public class CompanyController {
     }
 
     @PostMapping("/save")
-    public String add(@ModelAttribute("company") @Valid Company company, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "company/createCompany";
+    public String add(@ModelAttribute("company") @Valid Company company) {
         companyService.saveCompany(company);
         return "redirect:/api";
     }
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         companyService.deleteById(id);
-        //redirect.addAttribute("message","Saccsesfull");
         return "redirect:/api";
     }
 /////////////////////////////////////////////////////////////////////////////
@@ -55,11 +53,9 @@ public class CompanyController {
         model.addAttribute("company", companyService.getById(id));
         return "company/update";
     }
-//
+
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("company") @Valid Company company, @PathVariable("id") long id,BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "company/update";
+    public String update(@ModelAttribute("company") @Valid Company company, @PathVariable("id") long id) {
         companyService.updateCompany(id, company);
         return "redirect:/api";
     }

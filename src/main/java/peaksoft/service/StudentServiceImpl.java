@@ -7,36 +7,43 @@ import peaksoft.dao.StudentDaoImpl;
 import peaksoft.model.Student;
 
 import java.util.List;
+
 @Service
-public class StudentServiceImpl implements StudentService{
+public class StudentServiceImpl implements StudentService {
     private StudentDaoImpl studentDao;
-@Autowired
+
+    @Autowired
     public StudentServiceImpl(StudentDaoImpl studentDao) {
         this.studentDao = studentDao;
     }
-@Transactional
+
+    @Transactional
     @Override
     public Student saveStudent(Student student) {
         return studentDao.saveStudent(student);
     }
-@Transactional
+
+    @Transactional
     @Override
-    public void updateStudent(long id,Student student) {
-    studentDao.updateStudent(id,student);
+    public void updateStudent(long id, Student student) {
+        studentDao.updateStudent(id, student);
     }
-@Transactional
+
+    @Transactional
     @Override
     public Student getById(long id) {
         return studentDao.getById(id);
     }
-@Transactional
+
+    @Transactional
     @Override
     public void deleteById(long id) {
-   studentDao.deleteById(id);
+        studentDao.deleteById(id);
     }
-@Transactional
+
+    @Transactional
     @Override
-    public List<Student> students() {
-        return studentDao.students();
+    public List<Student> getAllStudent(long id) {
+        return studentDao.getAllStudent(id);
     }
 }

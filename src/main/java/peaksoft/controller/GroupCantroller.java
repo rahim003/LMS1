@@ -6,28 +6,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.model.Group;
 import peaksoft.service.CourseServiceImpl;
-import peaksoft.service.GroupServiceImpl;
+import peaksoft.service.GroupService;
 
 @Controller
-@RequestMapping("/gro")
+@RequestMapping("/group/{courseId}")
 public class GroupCantroller {
-    private final GroupServiceImpl service;
+    private final GroupService groupService;
     private final CourseServiceImpl courseService;
 
     @Autowired
-    public GroupCantroller(GroupServiceImpl service, CourseServiceImpl courseService) {
-        this.service = service;
+    public GroupCantroller(GroupService groupService, CourseServiceImpl courseService) {
+        this.groupService = groupService;
         this.courseService = courseService;
     }
-
-    @GetMapping()
-    public String getAllCompany(Model model) {
-        model.addAttribute("groups", service.groups());
+    @GetMapping
+    public String getAllGroup(@PathVariable("courseId") long id, Model model) {
+        model.addAttribute("groups", groupService.getAllGroup(id));
+        model.addAttribute("groupId", id);
         return "group/groups";
     }
 
-    @GetMapping("/avv")
-    public String saveCompany(Model model) {
+    @GetMapping("/addGroup")
+    public String saveGroup(Model model) {
         model.addAttribute("group1", new Group());
         return "group/createGroup";
     }
@@ -35,29 +35,25 @@ public class GroupCantroller {
     @PostMapping("saveGroup")
     public String add(@ModelAttribute("group") Group group) {
         group.setCourse(courseService.getById(group.getCourseId()));
-        service.saveGroup(group);
-        return "redirect:/gro";
+        groupService.saveGroup(group);
+        return "redirect:/group/{courseId}";
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id) {
-        service.deleteById(id);
-        //redirect.addAttribute("message","Saccsesfull");
-        return "redirect:/gro";
+    @DeleteMapping("/deleteGroup/{idDeleteGroup}")
+    public String deleteGroup(@PathVariable("idDeleteGroup") int id) {
+        groupService.deleteById(id);
+        return "redirect:/group/{courseId}";
     }
-
-    /////////////////////////////////////////////////////////////////////////////
-    @GetMapping("/update3/{id}")
-    public String edit(Model model, @PathVariable("id") long id) {
-        model.addAttribute("updateGro", service.getById(id));
+    @GetMapping("/updateGroup/{id}")
+    public String editGroup(Model model, @PathVariable("id") long id) {
+        model.addAttribute("updateGro", groupService.getById(id));
         return "group/updateGroup";
     }
-
-    //
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("group1") Group group, @PathVariable("id") long id) {
-        service.updateGroup(id, group);
-        return "redirect:/gro";
+    public String updateGroup(@ModelAttribute("group1") Group group, @PathVariable("id") long id) {
+        groupService.updateGroup(id, group);
+        long courseId = groupService.getById(id).getCourse().getId();
+        return "redirect:/group/"+1;
     }
 
 

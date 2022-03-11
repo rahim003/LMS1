@@ -2,14 +2,11 @@ package peaksoft.dao;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import peaksoft.model.Company;
 import peaksoft.model.Course;
 import peaksoft.model.Group;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -20,9 +17,7 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public Group saveGroup(Group group) {
-        List<Course>courses=new ArrayList<>();
-        group.setCourseList(courses);
-        manager.persist(group);
+        manager.merge(group);
         return group;
     }
 
@@ -37,17 +32,18 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public Group getById(long id) {
-        return manager.find(Group.class,id);
+        return manager.find(Group.class, id);
     }
 
     @Override
     public void deleteById(long id) {
-        manager.remove(getById(id));
+        manager.createQuery("delete from Group where id=: id").setParameter("id", id).executeUpdate();
     }
 
     @Override
-    public List<Group> groups() {
-        return  manager.createQuery("select gro from Group gro",Group.class).getResultList();
-
+    public List<Group> getAllGroup(long id) {
+        List<Group> groupList = manager.find(Course.class, id).getGroupList();
+        groupList.forEach(System.out::println);
+        return groupList;
     }
 }

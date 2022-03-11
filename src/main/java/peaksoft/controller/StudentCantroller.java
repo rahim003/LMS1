@@ -5,23 +5,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.model.Student;
-import peaksoft.service.GroupServiceImpl;
-import peaksoft.service.StudentServiceImpl;
+import peaksoft.service.GroupService;
+import peaksoft.service.StudentService;
 
 @Controller
-@RequestMapping("stu")
+@RequestMapping("student/{groupId}")
 public class StudentCantroller {
-private final StudentServiceImpl service;
-private final GroupServiceImpl groupService;
-@Autowired
-    public StudentCantroller(StudentServiceImpl service, GroupServiceImpl groupService) {
-        this.service = service;
-    this.groupService = groupService;
-}
+    private final StudentService studentService;
+    private final GroupService groupService;
 
-    @GetMapping()
-    public String getAllCompany(Model model) {
-        model.addAttribute("students", service.students());
+    @Autowired
+    public StudentCantroller(StudentService studentService, GroupService groupService) {
+        this.studentService = studentService;
+        this.groupService = groupService;
+    }
+
+    @GetMapping
+    public String getAllStudent(@PathVariable("groupId") long id, Model model) {
+        model.addAttribute("students", studentService.getAllStudent(id));
+        model.addAttribute("groupId", id);
         return "student/students";
     }
 
@@ -32,28 +34,29 @@ private final GroupServiceImpl groupService;
     }
 
     @PostMapping("/saveStudent")
-    public String add(@ModelAttribute("student")Student student) {
-    student.setGroup(groupService.getById(student.getGroupID()));
-        service.saveStudent(student);
-        return "redirect:/stu";
-    }
-    /////////////////////////////////////////////////////////////////////////////
-    @GetMapping("/update11/{id}")
-    public String edit(Model model, @PathVariable("id") long id) {
-        model.addAttribute("updateStu", service.getById(id));
-        return "student/updateStudents";
-    }
-    //
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("student1") Student student, @PathVariable("id") long id) {
-        service.updateStudent(id,student);
-        return "redirect:/stu";
+    public String addStudent(@ModelAttribute("student") Student student) {
+        student.setGroup(groupService.getById(student.getGroupID()));
+        studentService.saveStudent(student);
+        return "redirect:/student/{groupId}";
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id) {
-        service.deleteById(id);
-        //redirect.addAttribute("message","Saccsesfull");
-        return "redirect:/stu";
+    /////////////////////////////////////////////////////////////////////////////
+    @GetMapping("/updateStudent/{id}")
+    public String editStudent(Model model, @PathVariable("id") long id) {
+        model.addAttribute("updateStu", studentService.getById(id));
+        return "student/updateStudents";
+    }
+
+    @PatchMapping("/{id}")
+    public String updateStudent(@ModelAttribute("student1") Student student, @PathVariable("id") long id) {
+        studentService.updateStudent(id, student);
+        long groupId = studentService.getById(id).getGroup().getId();
+        return "redirect:/student/" + groupId;
+    }
+
+    @DeleteMapping("/deleteStudent/{idDeleteStudent}")
+    public String deleteStudent(@PathVariable("idDeleteStudent") int id) {
+        studentService.deleteById(id);
+        return "redirect:/student/{groupId}";
     }
 }

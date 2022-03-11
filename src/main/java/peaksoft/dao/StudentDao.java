@@ -13,5 +13,5 @@ public interface StudentDao {
 
     void deleteById(long id);
 
-    List<Student> students();
+    List<Student> getAllStudent(long id);
 }

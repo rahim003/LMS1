@@ -7,37 +7,43 @@ import peaksoft.dao.TeacherDaoImpl;
 import peaksoft.model.Teacher;
 
 import java.util.List;
+
 @Service
-public class TeacherServiceImpl implements TeacherService{
+public class TeacherServiceImpl implements TeacherService {
     private TeacherDaoImpl teacherDao;
+
     @Autowired
     public TeacherServiceImpl(TeacherDaoImpl teacherDao) {
         this.teacherDao = teacherDao;
     }
+
     @Transactional
     @Override
     public Teacher save(Teacher teacher) {
         return teacherDao.save(teacher);
     }
+
     @Transactional
     @Override
-    public void updateTeacher(long id,Teacher teacher) {
-     teacherDao.updateTeacher(id,teacher);
+    public void updateTeacher(long id, Teacher teacher) {
+        teacherDao.updateTeacher(id, teacher);
     }
-@Transactional
+
+    @Transactional
     @Override
     public Teacher getById(long id) {
-        return teacherDao.getById(id)
-                ;
+        return teacherDao.getById(id);
     }
-@Transactional
+
+    @Transactional
     @Override
     public void deleteById(long id) {
-  teacherDao.deleteById(id);
+        teacherDao.deleteById(id);
     }
-@Transactional
+
+    @Transactional
     @Override
-    public List<Teacher> teachers(long id) {
-        return teacherDao.teachers(id);
+    public List<Teacher> getAllTeacher(long id) {
+        return teacherDao.getAllTeacher(id);
     }
 }

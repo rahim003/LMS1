@@ -21,7 +21,7 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public void updateCourse(long id, Course course) {
-        Course course1=getById(id);
+        Course course1 = getById(id);
         course1.setCourseName(course.getCourseName());
         course1.setDirection(course.getDirection());
         course1.setCompanyId(course.getCompanyId());
@@ -30,17 +30,17 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public Course getById(long id) {
-        return manager.find(Course.class,id);
+        return manager.find(Course.class, id);
     }
 
     @Override
     public void deleteById(long id) {
-    manager.remove(getById(id));
+        manager.remove(getById(id));
     }
 
     @Override
-    public List<Course> courses(long id) {
-        return manager.createQuery("select course from Course course where course.company.id=:id",Course.class).setParameter("id",id).getResultList();
+    public List<Course> getAllCourse(long id) {
+        return manager.createQuery("select course from Course course where course.company.id=:id", Course.class).setParameter("id", id).getResultList();
 
     }
 }

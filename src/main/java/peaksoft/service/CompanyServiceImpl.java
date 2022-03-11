@@ -8,33 +8,40 @@ import peaksoft.dao.CompanyDaoImpl;
 import peaksoft.model.Company;
 
 import java.util.List;
+
 @Service
-public class CompanyServiceImpl implements CompanyService{
+public class CompanyServiceImpl implements CompanyService {
     private CompanyDao companyDao;
-   @Autowired
+
+    @Autowired
     public CompanyServiceImpl(CompanyDaoImpl companyDao) {
         this.companyDao = companyDao;
     }
+
     @Transactional
     @Override
     public Company saveCompany(Company company) {
         return companyDao.saveCompany(company);
     }
+
     @Transactional
     @Override
-    public void updateCompany(long id,Company company) {
-        companyDao.updateCompany(id,company);
+    public void updateCompany(long id, Company company) {
+        companyDao.updateCompany(id, company);
     }
+
     @Transactional
     @Override
     public Company getById(long id) {
         return companyDao.getById(id);
     }
+
     @Transactional
     @Override
     public void deleteById(long id) {
-      companyDao.deleteById(id);
+        companyDao.deleteById(id);
     }
+
     @Transactional
     @Override
     public List<Company> getAllCompany() {

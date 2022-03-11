@@ -29,7 +29,7 @@ public class Student {
         this.lastName = lastName;
         this.studyFormat = studyFormat;
     }
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.DETACH,CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
     @JoinColumn(name = "group_id")
     private Group group;
 

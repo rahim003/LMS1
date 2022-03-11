@@ -14,23 +14,23 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public Student saveStudent(Student student) {
-        manager.persist(student);
+        manager.merge(student);
         return student;
     }
 
     @Override
     public void updateStudent(long id, Student student) {
-     Student student1=getById(id);
-     student1.setFirstName(student.getFirstName());
-     student1.setLastName(student.getLastName());
-     student1.setEmail(student.getEmail());
-     student1.setStudyFormat(student.getStudyFormat());
-     manager.merge(student1);
+        Student student1 = getById(id);
+        student1.setFirstName(student.getFirstName());
+        student1.setLastName(student.getLastName());
+        student1.setEmail(student.getEmail());
+        student1.setStudyFormat(student.getStudyFormat());
+        manager.merge(student1);
     }
 
     @Override
     public Student getById(long id) {
-        return manager.find(Student.class,id);
+        return manager.find(Student.class, id);
     }
 
     @Override
@@ -39,8 +39,7 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public List<Student> students() {
-        List<Student>students=manager.createQuery("select student from Student student",Student.class).getResultList();
-        return students;
+    public List<Student> getAllStudent(long id) {
+        return    manager.createQuery("select student from Student student where student.group.id=:id", Student.class).setParameter("id", id).getResultList();
     }
 }

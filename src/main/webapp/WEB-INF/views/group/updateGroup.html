@@ -9,7 +9,8 @@
 
 </style>
 <div>
-    <form class="group" th:method="PATCH" th:action="@{/gro/{id}(id=${updateGro.getId()})}" th:object="${updateGro}">
+    <form class="group" th:method="PATCH" th:action="@{/group/{id}/{id}(id=${updateGro.getId()})}"
+          th:object="${updateGro}">
         <label for="groupName">Enter name: </label>
         <input type="text" th:field="*{groupName}" id="groupName"/>
         <br/>

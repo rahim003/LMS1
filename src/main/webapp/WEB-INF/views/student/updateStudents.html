@@ -7,7 +7,7 @@
 
 <body>
 <div class="student">
-    <form th:method="PATCH" th:action="@{/stu/{id}(id=${updateStu.getId()})}"
+    <form th:method="PATCH" th:action="@{/student/{id}/{id}(id=${updateStu.getId()})}"
           th:object="${updateStu}">
         <label for="firstName">Enter name: </label>
         <input type="text" th:field="*{firstName}" id="firstName"/>

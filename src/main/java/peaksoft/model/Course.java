@@ -1,17 +1,14 @@
 package peaksoft.model;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
 @Entity
 @Table(name = "course1")
 @NoArgsConstructor
-
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,21 +23,20 @@ public class Course {
     private Long groupId;
 
 
-
     public Course(String courseName, String direction) {
         this.courseName = courseName;
         this.direction = direction;
     }
 
-    @ManyToOne(cascade = { CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REMOVE},fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "group1_course1", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
     private List<Group> groupList;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "course")
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "course", fetch = FetchType.LAZY)
     private Teacher teacher;
 
     public long getId() {
@@ -107,6 +103,7 @@ public class Course {
     public void setGroupId(Long groupId) {
         this.groupId = groupId;
     }
+
     public void setGroup(Group group) {
         if (groupList == null) {
             groupList = new ArrayList<>();

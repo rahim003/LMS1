@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import peaksoft.dao.CourseDaoImpl;
 import peaksoft.model.Course;
-
-import java.beans.Transient;
 import java.util.List;
 
 @Service
@@ -27,7 +25,7 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     @Override
     public void updateCourse(long id, Course course) {
-        courseDao.updateCourse(id,course);
+        courseDao.updateCourse(id, course);
     }
 
     @Transactional
@@ -44,7 +42,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Transactional
     @Override
-    public List<Course> courses(long id) {
-        return courseDao.courses(id);
+    public List<Course> getAllCourse(long id) {
+        return courseDao.getAllCourse(id);
     }
 }
