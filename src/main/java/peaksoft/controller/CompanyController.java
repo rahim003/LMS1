@@ -31,6 +31,7 @@ public class CompanyController {
         model.addAttribute("getAllCompany", companyService.getAllCompany());
         return "company/companies";
     }
+
     @GetMapping("/add")
     public String saveCompany(Model model) {
         model.addAttribute("company1", new Company());
@@ -42,6 +43,7 @@ public class CompanyController {
         companyService.saveCompany(company);
         return "redirect:/api";
     }
+
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         companyService.deleteById(id);

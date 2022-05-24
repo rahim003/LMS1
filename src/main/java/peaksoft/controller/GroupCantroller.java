@@ -52,8 +52,8 @@ public class GroupCantroller {
     @PatchMapping("/{id}")
     public String updateGroup(@ModelAttribute("group1") Group group, @PathVariable("id") long id) {
         groupService.updateGroup(id, group);
-        long courseId = groupService.getById(id).getCourse().getId();
-        return "redirect:/group/"+1;
+        long courseId = 1;
+        return "redirect:/group/"+courseId;
     }
 
 

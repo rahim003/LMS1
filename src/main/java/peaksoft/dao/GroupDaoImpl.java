@@ -42,8 +42,6 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public List<Group> getAllGroup(long id) {
-        List<Group> groupList = manager.find(Course.class, id).getGroupList();
-        groupList.forEach(System.out::println);
-        return groupList;
+        return manager.find(Course.class, id).getGroupList();
     }
 }

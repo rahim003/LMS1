@@ -12,18 +12,18 @@ import peaksoft.service.TeacherService;
 @Controller
 @RequestMapping("/teacher/{courseId2}")
 public class TeacherController {
-    private final TeacherService teacherServicee;
+    private final TeacherService teacherService;
     private final CourseService courseService;
 
     @Autowired
     public TeacherController(TeacherService teacherServicee, CourseService courseService) {
-        this.teacherServicee = teacherServicee;
+        this.teacherService = teacherServicee;
         this.courseService = courseService;
     }
 
     @GetMapping
     public String getAllTeacher(@PathVariable("courseId2") long id, Model model) {
-        model.addAttribute("teachers", teacherServicee.getAllTeacher(id));
+        model.addAttribute("teachers", teacherService.getAllTeacher(id));
         model.addAttribute("courseId", id);
         return "teacher/teachers";
     }
@@ -35,30 +35,34 @@ public class TeacherController {
     }
 
     @PostMapping("/saveTeacher")
-    public String add(@ModelAttribute("teacher") Teacher teacher) throws Exception {
-        teacher.setCourse(courseService.getById(teacher.getCourseId()));
-        teacherServicee.save(teacher);
+    public String add(@PathVariable("courseId2") long id,@ModelAttribute("teacher") Teacher teacher) throws Exception {
+        if (courseService.getById(id).getTeacher()==null) {
+            teacher.setCourse(courseService.getById(teacher.getCourseId()));
+            teacherService.save(teacher);
+        }else{
+            throw new Exception("error one teacher save tru");
+        }
 
         return "redirect:/teacher/{courseId2}";
     }
 
     @DeleteMapping("/deleteTeacher/{idDeleteTeacher}")
     public String deleteTeacher(@PathVariable("idDeleteTeacher") long id) {
-        teacherServicee.deleteById(id);
+        teacherService.deleteById(id);
         System.out.println(id);
         return "redirect:/teacher/{courseId2}";
     }
     @GetMapping("/updateTeacher/{id}")
-    public String editTeacher(Model model, @PathVariable("id") long id) {
-        model.addAttribute("updateTeacher", teacherServicee.getById(id));
+    public String editTeacher(Model model, @PathVariable("id") long id, @PathVariable String courseId2) {
+        model.addAttribute("updateTeacher", teacherService.getById(id));
         return "teacher/updateTeacher";
     }
 
     //
     @PatchMapping("/{id}")
-    public String updateTeacher(@ModelAttribute("updateTeacher") Teacher teacher, @PathVariable("id") long id) {
-        teacherServicee.updateTeacher(id, teacher);
-        long courseId = teacherServicee.getById(id).getCourse().getId();
+    public String updateTeacher(@ModelAttribute("updateTeacher") Teacher teacher, @PathVariable("id") long id, @PathVariable String courseId2) {
+        teacherService.updateTeacher(id, teacher);
+        long courseId = teacherService.getById(id).getCourse().getId();
         return "redirect:/teacher/" + courseId;
     }
 }

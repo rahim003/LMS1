@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+
+</style>
 <body>
-<form th:method="POST" th:action="@{saveCourse}" th:object="${course1}">
-    <label for="courseName">Enter courSname</label>
+
+
+<form  class="rahim" th:method="POST" th:action="@{saveCourse}" th:object="${course1}">
+    <label  for="courseName">Enter courseName</label>
     <input type="text" th:field="*{courseName}" id="courseName">
     <label for="direction">Enter director</label>
     <input type="text" th:field="*{direction}" id="direction">
     <br/>
-    <label for="company Id">Enter company Id</label>
+    <label for="company Id" >Enter company Id</label>
     <input type="text" th:field="*{companyId}" id="company Id">
     <br/>
     <br/>
-    <input type="submit" value="Create"/>
+   <input   type="submit"  value="Create"/>
 </form>
 
 </body>

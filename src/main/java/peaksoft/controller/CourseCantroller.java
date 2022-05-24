@@ -26,7 +26,7 @@ public class CourseCantroller {
     }
 
     @GetMapping("/addNew")
-    public String saveCourse(Model model) {
+    public String saveCompany(Model model) {
         model.addAttribute("course1", new Course());
         return "course/createCourse";
     }
@@ -47,6 +47,7 @@ public class CourseCantroller {
     }
 
     @DeleteMapping("/deleteCourse/{idDeleteCourse}")
+
     public String deleteCourse(@PathVariable("idDeleteCourse") int id) {
         courseService.deleteById(id);
         return "redirect:/course/{companyId}";
